@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+  
+  {% load static %}
+
+  <script type="text/javascript" src="{% static 'jquery-latest.js' %}"></script>
+  <script type="text/javascript" src="{% static 'jquery.tablesorter.min.js' %}"></script> 
+  <script type="text/javascript" src="{% static 'foosball.js' %}"></script> 
+
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static foosball.css%}">
+
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand"> Smoked Meat Foosball League </a>
+
+    </div>
+  </div>
+</nav>
+
+
+{% block content %}
+{% endblock %}
+
+</body>
+
+</html>

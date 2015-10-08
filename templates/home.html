@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="col-md-8 col-md-offset-2">
+
+    <h4> Standings </h4>
+    <table id="standings-table" class="table tablesorter">
+      <tr> 
+        <th> Rank </th> 
+        <th> Name </th> 
+        <th> Wins </th> 
+        <th> Losses </th>
+        <th> Goals </th>
+        <th> Goals Against </th>
+        <th> Win % </th>
+        <th> Goal Ratio </th> 
+      </tr> 
+
+      {% for player in players %}
+        <tr> 
+          <td>{{ forloop.counter }} </td>
+          <td>{{ player.name }} </td>
+          <td>{{ player.wins }} </td>
+          <td>{{ player.losses }}</td>
+          <td>{{ player.goals }}</td>
+          <td>{{ player.goals_against }}</td>
+          <td>{{ player.win_percentage|truncatechars:8 }}</td>
+          <td>{{ player.goal_ratio|truncatechars:8}}</td>
+        </tr>
+      {% endfor %}
+    </table>
+
+    <h4> Recent Games </h4>
+    <table id="recent-table" class="table tablesorter">
+      <thead>
+        <tr> <th> Date </th> <th> Winner </th> <th> Loser </th> <th> Score </th> </tr> 
+      </thead>
+      <tbody>
+        {% for game in games %}
+          <tr> 
+            <td>{{ game.created_at }} </td>
+            <td>{{ game.winner.name }} </td> 
+            <td> {{ game.loser.name }} </td>
+            <td> 10 - {% if game.black_score == 10 %} {{ game.silver_score }} {% else %} {{game.black_score}} {% endif %} </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+  </div>
+
+{% endblock %}
