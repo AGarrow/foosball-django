@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.db.models.signals import post_save
 class Player(models.Model):
   name = models.CharField(max_length=40)
   wins = models.IntegerField(default=0)
@@ -52,3 +52,9 @@ class Game(models.Model):
 
   def __unicode__(self):
     return str({"black": self.black.name, "silver": self.silver.name, "score": {"black": self.black_score, "silver":self.silver_score} })
+
+def update_standings_info(sender, instance, created, **kwargs):
+  for p in Player.objects.all():
+    p.update_player_info()
+
+post_save.connect(update_standings_info, sender=Game)
